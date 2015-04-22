@@ -29,6 +29,8 @@ EXPOSE 25565
 EXPOSE 8123
 VOLUME ["/minecraft"]
 
+ENV UID=1000
+
 ENV MOTD A Minecraft Server Powered by Spigot & Docker
 ENV JVM_OPTS -Xmx1024M -Xms1024M
 ENV LEVEL=world PVP=true
