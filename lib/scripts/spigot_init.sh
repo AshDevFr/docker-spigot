@@ -58,6 +58,74 @@ then
     sed -i "/pvp\s*=/ c pvp=$PVP" /$SPIGOT_HOME/server.properties
   fi
 
+  if [ -n "$VDIST" ]; then
+    sed -i "/view-distance\s*=/ c view-distance=$VDIST" /$SPIGOT_HOME/server.properties
+  fi
+  
+  if [ -n "$OPPERM" ]; then
+    sed -i "/op-permission-level\s*=/ c op-permission-level=$OPPERM" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$NETHER" ]; then
+    sed -i "/allow-nether\s*=/ c allow-nether=$NETHER" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$FLY" ]; then
+    sed -i "/allow-flight\s*=/ c allow-flight=$FLY" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$MAXBHEIGHT" ]; then
+    sed -i "/max-build-height\s*=/ c max-build-height=$MAXBHEIGHT" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$NPCS" ]; then
+    sed -i "/spawn-npcs\s*=/ c spawn-npcs=$NPCS" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$WLIST" ]; then
+    sed -i "/white-list\s*=/ c white-list=$WLIST" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$ANIMALS" ]; then
+    sed -i "/spawn-animals\s*=/ c spawn-animals=$ANIMALS" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$HC" ]; then
+    sed -i "/hardcore\s*=/ c hardcore=$HC" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$ONLINE" ]; then
+    sed -i "/online-mode\s*=/ c online-mode=$ONLINE" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$RPACK" ]; then
+    sed -i "/resource-pack\s*=/ c resource-pack=$RPACK" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$DIFFICULTY" ]; then
+    sed -i "/difficulty\s*=/ c difficulty=$DIFFICULTY" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$CMDBLOCK" ]; then
+    sed -i "/enable-command-block\s*=/ c enable-command-block=$CMDBLOCK" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$MAXPLAYERS" ]; then
+    sed -i "/max-players\s*=/ c max-players=$MAXPLAYERS" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$MONSTERS" ]; then
+    sed -i "/spawn-monsters\s*=/ c spawn-monsters=$MONSTERS" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$STRUCTURES" ]; then
+    sed -i "/generate-structures\s*=/ c generate-structures=$STRUCTURES" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$SPAWNPROTECTION" ]; then
+    sed -i "/spawn-protection\s*=/ c spawn-protection=$SPAWNPROTECTION" /$SPIGOT_HOME/server.properties
+  fi
+
   if [ -n "$MODE" ]; then
     case ${MODE,,?} in
       0|1|2|3)
@@ -78,7 +146,7 @@ then
   fi
 fi
 
-if [ -n "$OPS" ]; then
+if [ -n "$OPS" -a ! -e /$SPIGOT_HOME/ops.txt.converted ]; then
   echo $OPS | awk -v RS=, '{print}' >> /$SPIGOT_HOME/ops.txt
 fi
 
