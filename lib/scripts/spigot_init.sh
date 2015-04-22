@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ ! -e /$SPIGOT_HOME/eula.txt ]; then
   if [ "$EULA" != "" ]; then
-    echo "# Generated via Docker on $(date)" > eula.txt
-    echo "eula=$EULA" >> eula.txt
+    echo "# Generated via Docker on $(date)" > /$SPIGOT_HOME/eula.txt
+    echo "eula=$EULA" >> /$SPIGOT_HOME/eula.txt
   else
     echo "*****************************************************************"
     echo "*****************************************************************"
@@ -76,7 +76,7 @@ then
 fi
 
 if [ -n "$OPS" ]; then
-  echo $OPS | awk -v RS=, '{print}' >> ops.txt
+  echo $OPS | awk -v RS=, '{print}' >> /$SPIGOT_HOME/ops.txt
 fi
 
 if [ -n "$ICON" -a ! -e /$SPIGOT_HOME/server-icon.png ]; then
