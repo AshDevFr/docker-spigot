@@ -1,4 +1,4 @@
-## Minecraft server SPIGIT on Ubuntu 14.04
+## Minecraft server SPIGOT on Ubuntu 14.04
 
 This docker image provides a Minecraft Server with Spigot that will automatically download the latest stable version at startup.
 
