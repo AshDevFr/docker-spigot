@@ -18,7 +18,6 @@ ENV SPIGOT_HOME /minecraft
 ADD ./lib/minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
 ADD ./lib/minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
 ADD ./lib/minecraft/server.properties /usr/local/etc/minecraft/server.properties
-ADD ./lib/eula.txt /$SPIGOT_HOME/eula.txt
 ADD ./lib/minecraft/plugins/dynmap-2.2-alpha-1.jar /$SPIGOT_HOME/plugins/dynmap.jar
 ADD ./lib/scripts/spigot_init.sh /spigot_init.sh
 
@@ -28,7 +27,11 @@ RUN useradd -s /bin/bash -d /minecraft -m minecraft
 
 EXPOSE 25565
 EXPOSE 8123
-VOLUME ["/$SPIGOT_HOME"]
+VOLUME ["/minecraft"]
+
+ENV MOTD A Minecraft Server Powered by Docker
+ENV JVM_OPTS -Xmx1024M -Xms1024M
+ENV TYPE=VANILLA VERSION=LATEST LEVEL=world PVP=true
 
 #set default command
 CMD /spigot_init.sh

@@ -1,92 +1,163 @@
-## Minecraft server SPIGIT on Ubuntu 14.04 with openjava 1.8
+## Minecraft server SPIGIT on Ubuntu 14.04
 
-This docker image builds and runs the spigot version of minecraft. 
+This docker image provides a Minecraft Server with Spigot that will automatically download the latest stable version at startup.
 
-If the spigot.jar is not found in the minecraft directory the system pulls down BuildTool and build a new spigot.jar from the latest
-released minecraft.jar
+To simply use the latest stable version, run
 
-## Why not a precompiled version of spigot included
+    docker run -d -p 25565:25565 $USER/docker-dante:latest
 
-Due to leagal reasons you can build it but not redistribute the finished jar.
+where the standard server port, 25565, will be exposed on your host machine.
 
-## Starting the container
+If you want to serve up multiple Minecraft servers or just use an alternate port,
+change the host-side port mapping such as
 
-To run the lastest stable version of this docker image run
+    docker run -p 25566:25565 ...
 
-	docker run -ti -p 25565:25565 -e EULA=true nimmis/spigot
+will serve your Minecraft server on your host's port 25566 since the `-p` syntax is
+`host-port`:`container-port`.
 
-the parameter
+Speaking of multiple servers, it's handy to give your containers explicit names using `--name`, such as
 
-	-e EULA=true
+    docker run -d -p 25565:25565 --name mc $USER/docker-dante:latest
 
-The is because Mojang now requires the end user to access their EULA, located at
-https://account.mojang.com/documents/minecraft_eula, the be able to start the server.
+With that you can easily view the logs, stop, or re-start the container:
 
-the parameter
+    docker logs -f mc
+        ( Ctrl-C to exit logs action )
 
-	-p 25565:25565
+    docker stop mc
 
-tell on witch external port the internal 25565 whould be connected, in this case the same, if
-you only type -p 25565 it will connect to a random port on the machine
+    docker start mc
 
-## Giving the container a name
+## Interacting with the server
 
-To make it easier to handle you container you can give it a name instead of the long
-number thats normaly give to it, add a
+In order to attach and interact with the Minecraft server, add `-it` when starting the container, such as
 
-	--name minecraft
+    docker run -d -it -p 25565:25565 --name mc $USER/docker-dante:latest
 
-to the run command to give it the name minecraft, then you can start it easier with
+With that you can attach and interact at any time using
 
-	docker start minecraft
-	docker stop minecraft
+    docker attach mc
 
-## First time run
+and then Control-p Control-q to **detach**.
 
-This will take a couple of minuters depending on computer and network speed. It will pull down
-the latest version on BuildTools and build a spigot.jar from the latest minecraft version.
-This is done in numerous steps so be patient. 
+For remote access, configure your Docker daemon to use a `tcp` socket (such as `-H tcp://0.0.0.0:2375`)
+and attach from another machine:
 
-If the compilation was successful the server will start in interactive mode. Log in from a minecraft
-client to controll that all works. The type
+    docker -H $HOST:2375 attach mc
 
-	stop
+Unless you're on a home/private LAN, you should [enable TLS access](https://docs.docker.com/articles/https/).
 
-to drop back to a root shell in the minecraft directory. Edit and add files to customize your
-minecraft server.
+## EULA Support
 
-When you are finished do a
+Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula). To accept add
 
-	exit
+        -e EULA=TRUE
 
-to exit and stop the container
+such as
 
-You can now start it in two different modes, interactive and non-interactive mode. 
+        docker run -d -it -e EULA=TRUE -p 25565:25565 $USER/docker-dante:latest
 
-## Interactive mode
+## Attaching data directory to host filesystem
 
-The interactive mode echos server output to the console and you can issue command by type
-them in the console. The server stops if you exits the console.
+In order to readily access the Minecraft data, use the `-v` argument
+to map a directory on your host machine to the container's `/minecraft` directory, such as:
 
-## Non-Interactive mode
+    docker run -d -v /path/on/host:/minecraft ...
 
-The Non-Interactive mode (daemon mode) starts the server without any output. If you need
-to connect and do something with the server you have to use the docker exec command.
+When attached in this way you can stop the server, edit the configuration under your attached `/path/on/host`
+and start the server again with `docker start CONTAINERID` to pick up the new configuration.
 
-## Having the minecraft files on the host machine
 
-If you delete the container all your filer in minecraft will be gone. To save them where it's
-easier to edit and do a backup of the files you can attach a directory from the host machine
-(where you run the docker command) and attach it to the local file system in the container.
-The syntax for it is
+## Running with Plugins
 
-	-v /host/path/to/dir:/container/path/to/dir
+In order to add mods, you will need to attach the container's `/minecraft` directory
+(see "Attaching data directory to host filesystem”).
+Then, you can add mods to the `/path/on/host/mods` folder you chose. From the example above,
+the `/path/on/host` folder contents look like:
 
-To attach the minecraft directory in the container to directory /home/nimmis/mc-srv you add
+```
+/path/on/host
+├── plugins
+│   └── ... INSTALL PLUGINS HERE ...
+├── ops.json
+├── server.properties
+├── whitelist.json
+└── ...
+```
 
-	-v /home/nimmis/mc-srv:/minecraft
+If you add mods while the container is running, you'll need to restart it to pick those
+up:
 
-## Future features
+    docker stop $ID
+    docker start $ID
 
-This is the initial release of this, more features to come.....
+## Server configuration
 
+### Op/Administrator Players
+
+To add more "op" (aka adminstrator) users to your Minecraft server, pass the Minecraft usernames separated by commas via the `OPS` environment variable, such as
+
+	docker run -d -e OPS=user1,user2 ...
+
+### Server icon
+
+A server icon can be configured using the `ICON` variable. The image will be automatically
+downloaded, scaled, and converted from any other image format:
+
+    docker run -d -e ICON=http://..../some/image.png ...
+
+### Level Seed
+
+If you want to create the Minecraft level with a specific seed, use `SEED`, such as
+
+    docker run -d -e SEED=1785852800490497919 ...
+
+### Game Mode
+
+By default, Minecraft servers are configured to run in Survival mode. You can
+change the mode using `MODE` where you can either provide the [standard
+numerical values](http://minecraft.gamepedia.com/Game_mode#Game_modes) or the
+shortcut values:
+
+* creative
+* survival
+
+For example:
+
+    docker run -d -e MODE=creative ...
+
+### Message of the Day
+
+The message of the day, shown below each server entry in the UI, can be changed with the `MOTD` environment variable, such as
+
+docker run -d -e 'MOTD=My Server' ...
+
+If you leave it off, the last used or default message will be used. _The example shows how to specify a server
+message of the day that contains spaces by putting quotes around the whole thing._
+
+### PVP Mode
+
+By default servers are created with player-vs-player (PVP) mode enabled. You can disable this with the `PVP`
+environment variable set to `false`, such as
+
+    docker run -d -e PVP=false ...
+
+### World Save Name
+
+You can either switch between world saves or run multiple containers with different saves by using the `LEVEL` option,
+where the default is "world":
+
+docker run -d -e LEVEL=bonus ...
+
+**NOTE:** if running multiple containers be sure to either specify a different `-v` host directory for each
+`LEVEL` in use or don't use `-v` and the container's filesystem will keep things encapsulated.
+
+## JVM Configuration
+
+### Memory Limit
+
+The Java memory limit can be adjusted using the `JVM_OPTS` environment variable, where the default is
+the setting shown in the example (max and min at 1024 MB):
+
+    docker run -e 'JVM_OPTS=-Xmx1024M -Xms1024M' ...

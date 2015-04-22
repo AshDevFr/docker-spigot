@@ -1,14 +1,22 @@
 #!/bin/bash
-if [ "$EULA" != "true" ]; then
-  echo "*****************************************************************"
-  echo "*****************************************************************"
-  echo "** To be able to run spigot you need to accept minecrafts EULA **"
-  echo "** see https://account.mojang.com/documents/minecraft_eula     **"
-  echo "** include -e EULA=true on the docker run command              **"
-  echo "*****************************************************************"
-  echo "*****************************************************************"
-  exit
+if [ ! -e /$SPIGOT_HOME/eula.txt ]; then
+  if [ "$EULA" != "" ]; then
+    echo "# Generated via Docker on $(date)" > eula.txt
+    echo "eula=$EULA" >> eula.txt
+  else
+    echo "*****************************************************************"
+    echo "*****************************************************************"
+    echo "** To be able to run spigot you need to accept minecrafts EULA **"
+    echo "** see https://account.mojang.com/documents/minecraft_eula     **"
+    echo "** include -e EULA=true on the docker run command              **"
+    echo "*****************************************************************"
+    echo "*****************************************************************"
+    exit
+  fi
 fi
+
+
+
 
 #only build if jar file does not exist
 if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then 
@@ -18,9 +26,6 @@ if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
   wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
   HOME=/$SPIGOT_HOME/build java -jar BuildTools.jar
   cp /$SPIGOT_HOME/build/Spigot/Spigot-Server/target/spigot-1.8*.jar /$SPIGOT_HOME/spigot.jar
-
-  #accept eola
-  echo "eula=true" > /$SPIGOT_HOME/eula.txt
 fi
 
 if [ ! -f /$SPIGOT_HOME/opts.txt ]
@@ -35,16 +40,66 @@ fi
 
 if [ ! -f /$SPIGOT_HOME/server.properties ]
 then
-    cp /usr/local/etc/minecraft/server.properties /$SPIGOT_HOME/
+  cp /usr/local/etc/minecraft/server.properties /$SPIGOT_HOME/
+    
+  if [ -n "$MOTD" ]; then
+    sed -i "/motd\s*=/ c motd=$MOTD" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$LEVEL" ]; then
+    sed -i "/level-name\s*=/ c level-name=$LEVEL" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$SEED" ]; then
+    sed -i "/level-seed\s*=/ c level-seed=$SEED" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$PVP" ]; then
+    sed -i "/pvp\s*=/ c pvp=$PVP" /$SPIGOT_HOME/server.properties
+  fi
+
+  if [ -n "$MODE" ]; then
+    case ${MODE,,?} in
+      0|1|2|3)
+        ;;
+      s*)
+        MODE=0
+        ;;
+      c*)
+        MODE=1
+        ;;
+      *)
+        echo "ERROR: Invalid game mode: $MODE"
+        exit 1
+        ;;
+    esac
+
+    sed -i "/gamemode\s*=/ c gamemode=$MODE" /$SPIGOT_HOME/server.properties
+  fi
 fi
 
+if [ -n "$OPS" ]; then
+  echo $OPS | awk -v RS=, '{print}' >> ops.txt
+fi
+
+if [ -n "$ICON" -a ! -e /$SPIGOT_HOME/server-icon.png ]; then
+  echo "Using server icon from $ICON..."
+  # Not sure what it is yet...call it "img"
+  wget -q -O /tmp/icon.img $ICON
+  specs=$(identify /tmp/icon.img | awk '{print $2,$3}')
+  if [ "$specs" = "PNG 64x64" ]; then
+    mv /tmp/icon.img /$SPIGOT_HOME/server-icon.png
+  else
+    echo "Converting image to 64x64 PNG..."
+    convert /tmp/icon.img -resize 64x64! /$SPIGOT_HOME/server-icon.png
+  fi
+fi
 
 # chance owner to minecraft
 chown -R minecraft.minecraft /$SPIGOT_HOME/
 
-
 cd /$SPIGOT_HOME/
-su - minecraft -c 'java -Xms1024M -Xmx2048M -XX:MaxPermSize=128M -jar spigot.jar'
+su - minecraft -c 'java $JVM_OPTS -jar spigot.jar'
 
 # fallback to root and run shell if spigot don't start/forced exit
 bash
