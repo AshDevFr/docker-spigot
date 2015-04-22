@@ -15,9 +15,6 @@ if [ ! -e /$SPIGOT_HOME/eula.txt ]; then
   fi
 fi
 
-
-
-
 #only build if jar file does not exist
 if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then 
   echo "Building spigot jar file, be patient"

@@ -29,9 +29,9 @@ EXPOSE 25565
 EXPOSE 8123
 VOLUME ["/minecraft"]
 
-ENV MOTD A Minecraft Server Powered by Docker
+ENV MOTD A Minecraft Server Powered by Spigot & Docker
 ENV JVM_OPTS -Xmx1024M -Xms1024M
-ENV TYPE=VANILLA VERSION=LATEST LEVEL=world PVP=true
+ENV LEVEL=world PVP=true
 
 #set default command
 CMD /spigot_init.sh
