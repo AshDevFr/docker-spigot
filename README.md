@@ -163,4 +163,4 @@ the setting shown in the example (max and min at 1024 MB):
     docker run -e 'JVM_OPTS=-Xmx1024M -Xms1024M' ...
     
     
-Thanks to nimmis (github.com/nimmis/docker-spigot) & (github.com/itzg/dockerfiles/tree/master/minecraft-server)
+Thanks to [nimmis](https://github.com/nimmis/docker-spigot) & [itzg](https://github.com/itzg/dockerfiles/tree/master/minecraft-server)
