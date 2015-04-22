@@ -21,7 +21,7 @@ ADD ./lib/minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
 ADD ./lib/minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
 ADD ./lib/minecraft/server.properties /usr/local/etc/minecraft/server.properties
 RUN mkdir -p /minecraft/plugins/
-ADD ./lib/minecraft/plugins/dynmap-2.2-alpha-1.jar /minecraft/plugins/dynmap.jar
+ADD ./lib/minecraft/plugins/dynmap-2.2-alpha-1.jar /usr/local/etc/minecraft/dynmap.jar
 ADD ./lib/scripts/spigot_init.sh /spigot_init.sh
 
 RUN chmod +x /spigot_init.sh

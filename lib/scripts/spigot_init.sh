@@ -26,6 +26,12 @@ if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
   wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
   HOME=/$SPIGOT_HOME/build java -jar BuildTools.jar
   cp /$SPIGOT_HOME/build/Spigot/Spigot-Server/target/spigot-1.8*.jar /$SPIGOT_HOME/spigot.jar
+  mkdir -p /$SPIGOT_HOME/plugins
+fi
+
+if [ ! -f /$SPIGOT_HOME/plugins/dynmap.jar ]
+then
+    cp /usr/local/etc/minecraft/dynmap.jar /$SPIGOT_HOME/plugins/
 fi
 
 if [ ! -f /$SPIGOT_HOME/opts.txt ]

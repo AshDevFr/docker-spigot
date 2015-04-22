@@ -162,6 +162,74 @@ docker run -d -e LEVEL=bonus ...
 **NOTE:** if running multiple containers be sure to either specify a different `-v` host directory for each
 `LEVEL` in use or don't use `-v` and the container's filesystem will keep things encapsulated.
 
+### View Distance ###
+
+docker run -d -e VDIST=10 ...
+
+### OP Permission Level ###
+
+docker run -d -e OPPERM=4 ...
+
+### Allow Nether ###
+
+docker run -d -e NETHER=true ...
+
+### Allow Flight ###
+
+docker run -d -e FLY=false ...
+
+### Max Build Height ###
+
+docker run -d -e MAXBHEIGHT=256 ...
+
+### Spawn NPCs ###
+
+docker run -d -e NPCS=true ...
+
+### White List ###
+
+docker run -d -e WLIST=false ...
+
+### Spawn Animals ###
+
+docker run -d -e ANIMALS=true ...
+
+### Hardcore ###
+
+docker run -d -e HC=false ...
+
+### Online Mode ###
+
+docker run -d -e ONLINE=true ...
+
+### Ressource Pack ###
+
+docker run -d -e RPACK='<url>' ...
+
+### Difficulty ###
+
+docker run -d -e DIFFICULTY=3 ...
+
+### Enable Command Block ###
+
+docker run -d -e CMDBLOCK=false ...
+
+### Max Players ###
+
+docker run -d -e MAXPLAYERS=20 ...
+
+### Spawn Monsters ###
+
+docker run -d -e MONSTERS=true ...
+
+### Generate Structures ###
+
+docker run -d -e STRUCTURES=true ...
+
+### Spawn Protection ###
+
+docker run -d -e SPAWNPROTECTION=16 ...
+
 ## JVM Configuration
 
 ### Memory Limit
