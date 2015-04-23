@@ -20,7 +20,6 @@ RUN useradd -s /bin/bash -d /minecraft -m minecraft
 ADD ./lib/minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
 ADD ./lib/minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
 ADD ./lib/minecraft/server.properties /usr/local/etc/minecraft/server.properties
-ADD ./lib/minecraft/plugins/dynmap-2.2-alpha-1.jar /usr/local/etc/minecraft/dynmap.jar
 ADD ./lib/scripts/spigot_init.sh /spigot_init.sh
 
 RUN chmod +x /spigot_init.sh
@@ -34,6 +33,8 @@ ENV UID=1000
 ENV MOTD A Minecraft Server Powered by Spigot & Docker
 ENV JVM_OPTS -Xmx1024M -Xms1024M
 ENV LEVEL=world PVP=true VDIST=10 OPPERM=4 NETHER=true FLY=false MAXBHEIGHT=256 NPCS=true WLIST=false ANIMALS=true HC=false ONLINE=true RPACK='' DIFFICULTY=3 CMDBLOCK=false MAXPLAYERS=20 MONSTERS=true STRUCTURES=true SPAWNPROTECTION=16
+
+ENV DYNMAP=true ESSENTIALS=false
 
 #set default command
 CMD /spigot_init.sh

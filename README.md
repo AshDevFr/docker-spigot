@@ -162,71 +162,71 @@ where the default is "world":
 **NOTE:** if running multiple containers be sure to either specify a different `-v` host directory for each
 `LEVEL` in use or don't use `-v` and the container's filesystem will keep things encapsulated.
 
-### View Distance ###
+### View Distance
 
     docker run -d -e VDIST=10 ...
 
-### OP Permission Level ###
+### OP Permission Level
 
     docker run -d -e OPPERM=4 ...
 
-### Allow Nether ###
+### Allow Nether
 
     docker run -d -e NETHER=true ...
 
-### Allow Flight ###
+### Allow Flight
 
     docker run -d -e FLY=false ...
 
-### Max Build Height ###
+### Max Build Height
 
     docker run -d -e MAXBHEIGHT=256 ...
 
-### Spawn NPCs ###
+### Spawn NPCs
 
     docker run -d -e NPCS=true ...
 
-### White List ###
+### White List
 
     docker run -d -e WLIST=false ...
 
-### Spawn Animals ###
+### Spawn Animals
 
     docker run -d -e ANIMALS=true ...
 
-### Hardcore ###
+### Hardcore
 
     docker run -d -e HC=false ...
 
-### Online Mode ###
+### Online Mode
 
     docker run -d -e ONLINE=true ...
 
-### Ressource Pack ###
+### Ressource Pack
 
     docker run -d -e RPACK='<url>' ...
 
-### Difficulty ###
+### Difficulty
 
     docker run -d -e DIFFICULTY=3 ...
 
-### Enable Command Block ###
+### Enable Command Block
 
     docker run -d -e CMDBLOCK=false ...
 
-### Max Players ###
+### Max Players
 
     docker run -d -e MAXPLAYERS=20 ...
 
-### Spawn Monsters ###
+### Spawn Monsters
 
     docker run -d -e MONSTERS=true ...
 
-### Generate Structures ###
+### Generate Structures
 
     docker run -d -e STRUCTURES=true ...
 
-### Spawn Protection ###
+### Spawn Protection
 
     docker run -d -e SPAWNPROTECTION=16 ...
 
@@ -238,6 +238,25 @@ The Java memory limit can be adjusted using the `JVM_OPTS` environment variable,
 the setting shown in the example (max and min at 1024 MB):
 
     docker run -e 'JVM_OPTS=-Xmx1024M -Xms1024M' ...
-    
+
+## Plugins  
+
+DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
+
+### Dynmap
+
+    docker run -d -e DYNMAP=true ...
+
+### Essentials
+
+    docker run -d -e ESSENTIALS=true ...
+
+### PermissionsEx
+
+    docker run -d -e PERMISSIONSEX=true ...
+
+### Clearlag
+
+    docker run -d -e CLEARLAG=true ...
     
 Thanks to [nimmis](https://github.com/nimmis/docker-spigot) & [itzg](https://github.com/itzg/dockerfiles/tree/master/minecraft-server)
