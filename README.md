@@ -4,7 +4,7 @@ This docker image provides a Minecraft Server with Spigot that will automaticall
 
 To simply use the latest stable version, run
 
-    docker run -d -p 25565:25565 $USER/docker-spigot:latest
+    docker run -d -p 25565:25565 ashdev/docker-spigot:latest
 
 where the standard server port, 25565, will be exposed on your host machine.
 
@@ -18,7 +18,7 @@ will serve your Minecraft server on your host's port 25566 since the `-p` syntax
 
 Speaking of multiple servers, it's handy to give your containers explicit names using `--name`, such as
 
-    docker run -d -p 25565:25565 --name mc $USER/docker-spigot:latest
+    docker run -d -p 25565:25565 --name mc ashdev/docker-spigot:latest
 
 With that you can easily view the logs, stop, or re-start the container:
 
@@ -33,7 +33,7 @@ With that you can easily view the logs, stop, or re-start the container:
 
 In order to attach and interact with the Minecraft server, add `-it` when starting the container, such as
 
-    docker run -d -it -p 25565:25565 --name mc $USER/docker-spigot:latest
+    docker run -d -it -p 25565:25565 --name mc ashdev/docker-spigot:latest
 
 With that you can attach and interact at any time using
 
@@ -56,7 +56,7 @@ Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/do
 
 such as
 
-    docker run -d -it -e EULA=TRUE -p 25565:25565 $USER/docker-spigot:latest
+    docker run -d -it -e EULA=TRUE -p 25565:25565 ashdev/docker-spigot:latest
 
 ## Attaching data directory to host filesystem
 
