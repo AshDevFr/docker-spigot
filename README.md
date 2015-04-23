@@ -245,7 +245,7 @@ DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
 
 ### Dynmap
 
-    docker run -d -e DYNMAP=true ...
+    docker run -d -e DYNMAP=true -p 8123:8123 ...
 
 ### Essentials
 
