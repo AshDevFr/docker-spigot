@@ -30,23 +30,23 @@ if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
 fi
 
 if [ -n "$DYNMAP" ]; then
-  wget -o /$SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
-  wget -o /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
+  wget -O /$SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
+  wget -O /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
   if [ -n "$ESSENTIALS" ]; then
-    wget -o /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
+    wget -O /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
   fi
 fi
 
 if [ -n "$ESSENTIALS" ]; then
-  wget -o /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
+  wget -O /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
 fi
 
 if [ -n "$CLEARLAG" ]; then
-  wget -o /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/858/961/Clearlag.jar
+  wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/858/961/Clearlag.jar
 fi
 
 if [ -n "$PERMISSIONSEX" ]; then
-  wget -o /$SPIGOT_HOME/plugins/PermissionsEx-1.23.2.jar http://dev.bukkit.org/media/files/874/950/PermissionsEx-1.23.2.jar
+  wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.2.jar http://dev.bukkit.org/media/files/874/950/PermissionsEx-1.23.2.jar
 fi
 
 if [ ! -f /$SPIGOT_HOME/opts.txt ]

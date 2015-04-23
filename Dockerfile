@@ -34,7 +34,7 @@ ENV MOTD A Minecraft Server Powered by Spigot & Docker
 ENV JVM_OPTS -Xmx1024M -Xms1024M
 ENV LEVEL=world PVP=true VDIST=10 OPPERM=4 NETHER=true FLY=false MAXBHEIGHT=256 NPCS=true WLIST=false ANIMALS=true HC=false ONLINE=true RPACK='' DIFFICULTY=3 CMDBLOCK=false MAXPLAYERS=20 MONSTERS=true STRUCTURES=true SPAWNPROTECTION=16
 
-ENV DYNMAP=true ESSENTIALS=false
+ENV DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
 
 #set default command
 CMD /spigot_init.sh
