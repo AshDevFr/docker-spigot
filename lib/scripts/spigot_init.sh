@@ -189,7 +189,7 @@ chown -R minecraft.minecraft /$SPIGOT_HOME/
 
 cd /$SPIGOT_HOME/
 
-exec java $JVM_OPTS -jar spigot.jar
+su - minecraft -c 'exec java $JVM_OPTS -jar spigot.jar'
 
 # fallback to root and run shell if spigot don't start/forced exit
 bash
