@@ -29,24 +29,45 @@ if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
   mkdir -p /$SPIGOT_HOME/plugins
 fi
 
-if [ -n "$DYNMAP" -a "$DYNMAP" = "true" ]; then
-  wget -O /$SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
-  wget -O /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
-  if [ -n "$ESSENTIALS" -a "$ESSENTIALS" = "true" ]; then
-    wget -O /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
+if [ -n "$DYNMAP" ]; then
+  if [ "$DYNMAP" = "true" ]; then
+    wget -O /$SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
+    wget -O /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
+    if [ -n "$ESSENTIALS" ]; then
+      if [ "$ESSENTIALS" = "true" ]; then
+        wget -O /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
+      else
+        rm -f /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
+      fi
+    fi
+  else
+    rm -f /$SPIGOT_HOME/plugins/dynmap-HEAD.jar
+    rm -f /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar
   fi
 fi
 
-if [ -n "$ESSENTIALS" -a "$ESSENTIALS" = "true" ]; then
-  wget -O /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
+if [ -n "$ESSENTIALS" ]; then
+  if [ "$ESSENTIALS" = "true" ]; then
+    wget -O /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
+  else
+    rm -f /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar
+  fi
 fi
 
-if [ -n "$CLEARLAG" -a "$CLEARLAG" = "true" ]; then
-  wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/858/961/Clearlag.jar
+if [ -n "$CLEARLAG" ]; then
+  if [ "$CLEARLAG" = "true" ]; then
+    wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/858/961/Clearlag.jar
+  else
+    rm -f /$SPIGOT_HOME/plugins/Clearlag.jar
+  fi
 fi
 
-if [ -n "$PERMISSIONSEX" -a "$PERMISSIONSEX" = "true" ]; then
-  wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.2.jar http://dev.bukkit.org/media/files/874/950/PermissionsEx-1.23.2.jar
+if [ -n "$PERMISSIONSEX" ]; then
+  if [ "$PERMISSIONSEX" = "true" ]; then
+    wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.2.jar http://dev.bukkit.org/media/files/874/950/PermissionsEx-1.23.2.jar
+  else
+    rm -f /$SPIGOT_HOME/plugins/PermissionsEx-*.jar
+  fi
 fi
 
 if [ ! -f /$SPIGOT_HOME/opts.txt ]
