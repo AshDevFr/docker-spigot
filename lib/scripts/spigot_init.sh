@@ -37,12 +37,15 @@ if [ -n "$DYNMAP" ]; then
       if [ "$ESSENTIALS" = "true" ]; then
         wget -O /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
       else
+    echo "Removing Dynmap Essential..."
         rm -f /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
       fi
     fi
   else
+    echo "Removing Dynmap..."
     rm -f /$SPIGOT_HOME/plugins/dynmap-HEAD.jar
     rm -f /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar
+    rm -f /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
   fi
 fi
 
@@ -50,6 +53,7 @@ if [ -n "$ESSENTIALS" ]; then
   if [ "$ESSENTIALS" = "true" ]; then
     wget -O /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
   else
+    echo "Removing Essentials..."
     rm -f /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar
   fi
 fi
@@ -58,6 +62,7 @@ if [ -n "$CLEARLAG" ]; then
   if [ "$CLEARLAG" = "true" ]; then
     wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/858/961/Clearlag.jar
   else
+    echo "Removing Clearlag..."
     rm -f /$SPIGOT_HOME/plugins/Clearlag.jar
   fi
 fi
@@ -66,6 +71,7 @@ if [ -n "$PERMISSIONSEX" ]; then
   if [ "$PERMISSIONSEX" = "true" ]; then
     wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.2.jar http://dev.bukkit.org/media/files/874/950/PermissionsEx-1.23.2.jar
   else
+    echo "Removing PermissionsEx..."
     rm -f /$SPIGOT_HOME/plugins/PermissionsEx-*.jar
   fi
 fi
