@@ -64,7 +64,7 @@ fi
 if [ -n "$CLEARLAG" ]; then
   if [ "$CLEARLAG" = "true" ]; then
     echo "Downloading ClearLag..."
-    wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/858/961/Clearlag.jar
+    wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/900/742/Clearlag.jar
   else
     echo "Removing Clearlag..."
     rm -f /$SPIGOT_HOME/plugins/Clearlag.jar
@@ -74,7 +74,7 @@ fi
 if [ -n "$PERMISSIONSEX" ]; then
   if [ "$PERMISSIONSEX" = "true" ]; then
     echo "Downloading PermissionsEx..."
-    wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.2.jar http://dev.bukkit.org/media/files/874/950/PermissionsEx-1.23.2.jar
+    wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.4.jar http://dev.bukkit.org/media/files/909/154/PermissionsEx-1.23.4.jar
   else
     echo "Removing PermissionsEx..."
     rm -f /$SPIGOT_HOME/plugins/PermissionsEx-*.jar
