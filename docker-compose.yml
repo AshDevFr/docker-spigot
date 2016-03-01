@@ -1,6 +1,7 @@
 spigot:
   build: .
   environment:
+  - REV=1.9
   - POLL=true
   - EULA=TRUE
   - OPS=AshDev
@@ -10,7 +11,7 @@ spigot:
   - PERMISSIONSEX=false
   - CLEARLAG=false
   volumes:
-   - /tmp/docker/spigot:/minecraft
+  - $HOME/Docker/spigot:/minecraft
   ports:
-   - "25565:25565"
-   - "8123:8123"
+  - "25565:25565"
+  - "8123:8123"

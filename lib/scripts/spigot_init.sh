@@ -24,7 +24,7 @@ if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
   mkdir -p /$SPIGOT_HOME/build
   cd /$SPIGOT_HOME/build
   wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-  HOME=/$SPIGOT_HOME/build java -jar BuildTools.jar --rev latest
+  HOME=/$SPIGOT_HOME/build java -jar BuildTools.jar --rev $REV
   cp /$SPIGOT_HOME/build/Spigot/Spigot-Server/target/spigot-*.jar /$SPIGOT_HOME/spigot.jar
   mkdir -p /$SPIGOT_HOME/plugins
 fi

@@ -6,6 +6,10 @@ This docker image is ready to use the latest version of Minecraft (1.9 Combat Up
 
 Most of the plugins are not already released for this version. In case of issue, disable them.
 
+To use the version 1.9 of docker run
+
+    docker run -d -it -e REV=1.9 -p 25565:25565 ashdev/docker-spigot:latest
+
 ## Description
 
 This docker image provides a Minecraft Server with Spigot that will automatically download the latest stable version at startup.
