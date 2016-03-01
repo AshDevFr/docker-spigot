@@ -6,9 +6,9 @@ spigot:
   - OPS=AshDev
   - PVP=false
   - DYNMAP=true
-  - ESSENTIALS=true
-  - PERMISSIONSEX=true
-  - CLEARLAG=true
+  - ESSENTIALS=false
+  - PERMISSIONSEX=false
+  - CLEARLAG=false
   volumes:
    - /tmp/docker/spigot:/minecraft
   ports:

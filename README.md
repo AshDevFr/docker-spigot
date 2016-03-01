@@ -1,4 +1,12 @@
-## Minecraft server SPIGOT on Ubuntu 14.04
+# Minecraft server SPIGOT on Ubuntu 14.04
+
+## Minecraft 1.9 Combat Update
+
+This docker image is ready to use the latest version of Minecraft (1.9 Combat Update)
+
+Most of the plugins are not already released for this version. In case of issue, disable them.
+
+## Description
 
 This docker image provides a Minecraft Server with Spigot that will automatically download the latest stable version at startup.
 
@@ -258,5 +266,5 @@ DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
 ### Clearlag
 
     docker run -d -e CLEARLAG=true ...
-    
+
 Thanks to [nimmis](https://github.com/nimmis/docker-spigot) & [itzg](https://github.com/itzg/dockerfiles/tree/master/minecraft-server)
