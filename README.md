@@ -1,5 +1,7 @@
 # Minecraft server SPIGOT on Ubuntu 14.04
 
+[![](https://badge.imagelayers.io/ashdev/docker-spigot:latest.svg)](https://imagelayers.io/?images=ashdev/docker-spigot:latest 'Get your own badge on imagelayers.io')
+
 ## Minecraft 1.9 Combat Update
 
 This docker image is ready to use the latest version of Minecraft (1.9 Combat Update)
