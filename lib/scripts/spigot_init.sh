@@ -29,6 +29,16 @@ if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
   mkdir -p /$SPIGOT_HOME/plugins
 fi
 
+if [ -n "$WORLDBORDER" ]; then
+  if [ "$WORLDBORDER" = "true" ]; then
+    echo "Downloading WorldBorder..."
+    wget -O /$SPIGOT_HOME/plugins/WorldBorder.jar https://dev.bukkit.org/projects/worldborder/files/latest
+  else
+    echo "Removing WorldBorder..."
+    rm -f /$SPIGOT_HOME/plugins/WorldBorder.jar
+  fi
+fi
+
 if [ -n "$DYNMAP" ]; then
   if [ "$DYNMAP" = "true" ]; then
     echo "Downloading Dynmap..."
@@ -64,7 +74,7 @@ fi
 if [ -n "$CLEARLAG" ]; then
   if [ "$CLEARLAG" = "true" ]; then
     echo "Downloading ClearLag..."
-    wget -O /$SPIGOT_HOME/plugins/Clearlag.jar http://dev.bukkit.org/media/files/909/721/Clearlag.jar
+    wget -O /$SPIGOT_HOME/plugins/Clearlag.jar https://dev.bukkit.org/projects/clearlagg/files/latest
   else
     echo "Removing Clearlag..."
     rm -f /$SPIGOT_HOME/plugins/Clearlag.jar
@@ -74,7 +84,7 @@ fi
 if [ -n "$PERMISSIONSEX" ]; then
   if [ "$PERMISSIONSEX" = "true" ]; then
     echo "Downloading PermissionsEx..."
-    wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.4.jar http://dev.bukkit.org/media/files/909/154/PermissionsEx-1.23.4.jar
+    wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.4.jar https://dev.bukkit.org/projects/permissionsex/files/latest
   else
     echo "Removing PermissionsEx..."
     rm -f /$SPIGOT_HOME/plugins/PermissionsEx-*.jar
@@ -216,7 +226,7 @@ if [ -n "$ICON" -a ! -e /$SPIGOT_HOME/server-icon.png ]; then
   fi
 fi
 
-# chance owner to minecraft
+# change owner to minecraft
 chown -R minecraft.minecraft /$SPIGOT_HOME/
 
 cd /$SPIGOT_HOME/
