@@ -17,9 +17,9 @@ ENV SPIGOT_HOME /minecraft
 
 RUN useradd -s /bin/bash -d /minecraft -m minecraft
 
-ADD ./lib/minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
-ADD ./lib/minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
-ADD ./lib/minecraft/server.properties /usr/local/etc/minecraft/server.properties
+ADD ./minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
+ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
+ADD ./minecraft/server.properties /usr/local/etc/minecraft/server.properties
 ADD ./lib/scripts/spigot_init.sh /spigot_init.sh
 
 RUN chmod +x /spigot_init.sh

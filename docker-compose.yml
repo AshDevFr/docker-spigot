@@ -1,5 +1,5 @@
 spigot:
-  build: .
+  build: images/ubuntu
   environment:
   - REV=latest
   - POLL=true

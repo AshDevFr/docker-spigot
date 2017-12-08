@@ -1,0 +1,25 @@
+sudo: true
+dist: trusty
+
+env:
+  global:
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - REPO=ashdev/docker-spigot
+
+jobs:
+  include:
+    - stage: build docker ubuntu image
+      script:
+      # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - docker build -t $REPO:$COMMIT images/ubuntu
+      - docker images
+      - docker tag $REPO:$COMMIT $REPO:latest
+      # - docker push $REPO
+
+    - stage: build docker alpine image
+      script:
+      # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - docker build -t $REPO:$COMMIT images/alpine
+      - docker images
+      - docker tag $REPO:$COMMIT $REPO:alpine
+      # - docker push $REPO

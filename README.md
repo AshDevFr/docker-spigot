@@ -1,16 +1,30 @@
-# Minecraft server SPIGOT on Ubuntu 14.04
+# Minecraft server SPIGOT
 
-[![](https://badge.imagelayers.io/ashdev/docker-spigot:latest.svg)](https://imagelayers.io/?images=ashdev/docker-spigot:latest 'Get your own badge on imagelayers.io')
+[![Docker Stars](https://img.shields.io/docker/stars/ashdev/docker-spigot.svg)](https://hub.docker.com/r/ashdev/docker-spigot)
+[![Docker Pulls](https://img.shields.io/docker/pulls/ashdev/docker-spigot.svg)](https://hub.docker.com/r/ashdev/docker-spigot)
+[![Docker Build Status](https://img.shields.io/docker/build/ashdev/docker-spigot.svg)](https://hub.docker.com/r/ashdev/docker-spigot/builds)
+[![ImageLayers Size](https://img.shields.io/imagelayers/image-size/ashdev/docker-spigot/latest.svg)]()
+[![ImageLayers Layers](https://img.shields.io/imagelayers/layers/ashdev/docker-spigot/latest.svg)]()
+[![Travis](https://img.shields.io/travis/AshDevFr/docker-spigot.svg)]()
 
 ## Minecraft 1.12 World of Color Update
 
 This docker image is ready to use the latest version of Minecraft (1.12 World of Color Update)
 
-Most of the plugins are not already released for this version. In case of issue, disable them.
+### Available tags
+
+All available tags are always listed [in Docker Hub](https://hub.docker.com/r/ashdev/docker-spigot/tags):
+
+- `1.12.2`, `1.12`, `latest`: Latest server for Minecraft 1.12.2.
+- `1.12.2-alpine`, `1.12-alpine`, `alpine`: Latest server using Alpine for Minecraft 1.12.2.
+
+
+Most of the plugins are not already released for the latest version. In case of issue, disable them.
 
 To use the version 1.12 of docker run
 
     docker run -d -it -e REV=1.12 -p 25565:25565 ashdev/docker-spigot:latest
+
 ## Description
 
 This docker image provides a Minecraft Server with Spigot that will automatically download the latest stable version at startup.
@@ -80,6 +94,8 @@ to map a directory on your host machine to the container's `/minecraft` director
 
 When attached in this way you can stop the server, edit the configuration under your attached `/path/on/host`
 and start the server again with `docker start CONTAINERID` to pick up the new configuration.
+
+### In ubuntu you can specify the UID of the user
 
 **NOTE**: By default, the files in the attached directory will be owned by the host user with UID of 1000.
 You can use an different UID by passing the option:
