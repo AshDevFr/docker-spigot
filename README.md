@@ -1,10 +1,10 @@
 # Minecraft server SPIGOT
 
-[![Docker Stars](https://img.shields.io/docker/stars/ashdev/docker-spigot.svg)](https://hub.docker.com/r/ashdev/docker-spigot)
-[![Docker Pulls](https://img.shields.io/docker/pulls/ashdev/docker-spigot.svg)](https://hub.docker.com/r/ashdev/docker-spigot)
-[![Docker Build Status](https://img.shields.io/docker/build/ashdev/docker-spigot.svg)](https://hub.docker.com/r/ashdev/docker-spigot/builds)
-[![ImageLayers Size](https://img.shields.io/imagelayers/image-size/ashdev/docker-spigot/latest.svg)]()
-[![ImageLayers Layers](https://img.shields.io/imagelayers/layers/ashdev/docker-spigot/latest.svg)]()
+[![Docker Stars](https://img.shields.io/docker/stars/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot)
+[![Docker Pulls](https://img.shields.io/docker/pulls/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot)
+[![Docker Build Status](https://img.shields.io/docker/build/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot/builds)
+[![ImageLayers Size](https://img.shields.io/imagelayers/image-size/ashdev/minecraft-spigot/latest.svg)]()
+[![ImageLayers Layers](https://img.shields.io/imagelayers/layers/ashdev/minecraft-spigot/latest.svg)]()
 [![Travis](https://img.shields.io/travis/AshDevFr/docker-spigot.svg)]()
 
 ## Minecraft 1.12 World of Color Update
@@ -13,7 +13,7 @@ This docker image is ready to use the latest version of Minecraft (1.12 World of
 
 ### Available tags
 
-All available tags are always listed [in Docker Hub](https://hub.docker.com/r/ashdev/docker-spigot/tags):
+All available tags are always listed [in Docker Hub](https://hub.docker.com/r/ashdev/minecraft-spigot/tags):
 
 - `1.12.2`, `1.12`, `latest`: Latest server for Minecraft 1.12.2.
 - `1.12.2-alpine`, `1.12-alpine`, `alpine`: Latest server using Alpine for Minecraft 1.12.2.
@@ -23,7 +23,7 @@ Most of the plugins are not already released for the latest version. In case of 
 
 To use the version 1.12 of docker run
 
-    docker run -d -it -e REV=1.12 -p 25565:25565 ashdev/docker-spigot:latest
+    docker run -d -it -e REV=1.12 -p 25565:25565 ashdev/minecraft-spigot:latest
 
 ## Description
 
@@ -31,7 +31,7 @@ This docker image provides a Minecraft Server with Spigot that will automaticall
 
 To simply use the latest stable version, run
 
-    docker run -d -p 25565:25565 ashdev/docker-spigot:latest
+    docker run -d -p 25565:25565 ashdev/minecraft-spigot:latest
 
 where the standard server port, 25565, will be exposed on your host machine.
 
@@ -45,7 +45,7 @@ will serve your Minecraft server on your host's port 25566 since the `-p` syntax
 
 Speaking of multiple servers, it's handy to give your containers explicit names using `--name`, such as
 
-    docker run -d -p 25565:25565 --name mc ashdev/docker-spigot:latest
+    docker run -d -p 25565:25565 --name mc ashdev/minecraft-spigot:latest
 
 With that you can easily view the logs, stop, or re-start the container:
 
@@ -60,7 +60,7 @@ With that you can easily view the logs, stop, or re-start the container:
 
 In order to attach and interact with the Minecraft server, add `-it` when starting the container, such as
 
-    docker run -d -it -p 25565:25565 --name mc ashdev/docker-spigot:latest
+    docker run -d -it -p 25565:25565 --name mc ashdev/minecraft-spigot:latest
 
 With that you can attach and interact at any time using
 
@@ -83,7 +83,7 @@ Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/do
 
 such as
 
-    docker run -d -it -e EULA=TRUE -p 25565:25565 ashdev/docker-spigot:latest
+    docker run -d -it -e EULA=TRUE -p 25565:25565 ashdev/minecraft-spigot:latest
 
 ## Attaching data directory to host filesystem
 
