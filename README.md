@@ -7,6 +7,8 @@
 [![ImageLayers Layers](https://img.shields.io/imagelayers/layers/ashdev/minecraft-spigot/latest.svg)]()
 [![Travis](https://img.shields.io/travis/AshDevFr/docker-spigot.svg)]()
 
+**This is the new repository for [ashdev/docker-spigot](https://hub.docker.com/r/ashdev/docker-spigot)**
+
 ## Minecraft 1.12 World of Color Update
 
 This docker image is ready to use the latest version of Minecraft (1.12 World of Color Update)
