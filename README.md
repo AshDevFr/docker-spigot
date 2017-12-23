@@ -77,6 +77,16 @@ and attach from another machine:
 
 Unless you're on a home/private LAN, you should [enable TLS access](https://docs.docker.com/articles/https/).
 
+## Run commands in the Minecraft servers
+
+You can send commands in the server by calling
+
+    docker exec mc /spigot_cmd.sh <command>
+
+example:
+
+    docker exec mc /spigot_cmd.sh op AshDevFr
+
 ## EULA Support
 
 Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula). To accept add
@@ -260,6 +270,22 @@ where the default is "world":
 ### Spawn Protection
 
     docker run -d -e SPAWNPROTECTION=16 ...
+
+### Max tick time
+
+    docker run -d -e MAX_TICK_TIME=60000 ...
+
+### Max World size
+
+    docker run -d -e MAX_WORLD_SIZE=29999984 ...
+
+### Resource pack sha1
+
+    docker run -d -e RPACK_SHA1= ...
+
+### Network compression threshold
+
+    docker run -d -e NETWORK_COMPRESSION_THRESHOLD=256 ...
 
 ## JVM Configuration
 

@@ -15,20 +15,27 @@ RUN apt-get update && apt-get install -y wget git && apt-get clean all
 #default directory for SPIGOT-server
 ENV SPIGOT_HOME /minecraft
 
-RUN useradd -s /bin/bash -d /minecraft -m minecraft
+RUN groupadd -g 1000 minecraft && \
+  useradd -s /bin/bash -d /minecraft -m minecraft -g minecraft && \
+  usermod -aG root minecraft
 
-ADD ./minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
+ADD ./minecraft/ops.txt /usr/local/etc/minecraft/ops.txt
 ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
 ADD ./minecraft/server.properties /usr/local/etc/minecraft/server.properties
 ADD ./lib/scripts/spigot_init.sh /spigot_init.sh
+ADD ./lib/scripts/spigot_run.sh /spigot_run.sh
+ADD ./lib/scripts/spigot_cmd.sh /spigot_cmd.sh
 
 RUN chmod +x /spigot_init.sh
+RUN chmod +x /spigot_run.sh
+RUN chmod +x /spigot_cmd.sh
 
 EXPOSE 25565
 EXPOSE 8123
 VOLUME ["/minecraft"]
 
 ENV UID=1000
+ENV GUID=1000
 
 ENV MOTD A Minecraft Server Powered by Spigot & Docker
 ENV REV latest

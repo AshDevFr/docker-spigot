@@ -12,7 +12,7 @@ ENV JAVA_VERSION_MAJOR=8 \
 
 # Install dependencies
 RUN apk upgrade --update && \
-    apk add --update wget curl ca-certificates openssl bash git && \
+    apk add --update wget curl ca-certificates openssl bash git screen util-linux && \
     update-ca-certificates
 
 # Install Java8
@@ -23,12 +23,16 @@ ENV SPIGOT_HOME /minecraft
 
 RUN mkdir ${SPIGOT_HOME}
 
-ADD ./minecraft/opts.txt /usr/local/etc/minecraft/opts.txt
+ADD ./minecraft/ops.txt /usr/local/etc/minecraft/ops.txt
 ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
 ADD ./minecraft/server.properties /usr/local/etc/minecraft/server.properties
 ADD ./lib/scripts/spigot_init.sh /spigot_init.sh
+ADD ./lib/scripts/spigot_run.sh /spigot_run.sh
+ADD ./lib/scripts/spigot_cmd.sh /spigot_cmd.sh
 
 RUN chmod +x /spigot_init.sh
+RUN chmod +x /spigot_run.sh
+RUN chmod +x /spigot_cmd.sh
 
 EXPOSE 25565
 EXPOSE 8123
