@@ -1,0 +1,18 @@
+spigot:
+  build: images/alpine
+  environment:
+  - REV=latest
+  - POLL=true
+  - EULA=TRUE
+  - OPS=AshDev
+  - PVP=false
+  - WORLDBORDER=true
+  - DYNMAP=true
+  - ESSENTIALS=false
+  - PERMISSIONSEX=false
+  - CLEARLAG=false
+  volumes:
+  - ./data:/minecraft
+  ports:
+  - "25565:25565"
+  - "8123:8123"

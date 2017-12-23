@@ -12,7 +12,8 @@ ENV JAVA_VERSION_MAJOR=8 \
 
 # Install dependencies
 RUN apk upgrade --update && \
-    apk add --update curl ca-certificates bash git
+    apk add --update wget curl ca-certificates openssl bash git && \
+    update-ca-certificates
 
 # Install Java8
 RUN apk add openjdk8-jre
