@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-usermod --uid $UID minecraft
-groupmod --gid $GUID minecraft
+sudo usermod --uid $UID minecraft
+sudo groupmod --gid $GUID minecraft
 
 if [ ! -e /$SPIGOT_HOME/eula.txt ]; then
   if [ "$EULA" != "" ]; then
@@ -179,13 +179,13 @@ if [ -n "$ICON" -a ! -e /$SPIGOT_HOME/server-icon.png ]; then
 fi
 
 # change owner to minecraft
-chown -R minecraft:minecraft /$SPIGOT_HOME/
+sudo chown -R minecraft:minecraft /$SPIGOT_HOME/
 
 cd /$SPIGOT_HOME/
 
 # su - minecraft -c "/spigot_run.sh server java $JVM_OPTS -jar spigot.jar"
 # Removing the call by minecraft because it does not have access to /proc
-su -c "/spigot_run.sh server java $JVM_OPTS -jar spigot.jar"
+/spigot_run.sh server java $JVM_OPTS -jar spigot.jar
 
 # fallback to root and run shell if spigot don't start/forced exit
 bash

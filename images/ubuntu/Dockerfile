@@ -17,7 +17,9 @@ ENV SPIGOT_HOME /minecraft
 
 RUN groupadd -g 1000 minecraft && \
   useradd -s /bin/bash -d /minecraft -m minecraft -g minecraft && \
-  usermod -aG root minecraft
+  usermod -aG sudo minecraft
+
+RUN echo "minecraft ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/minecraft
 
 ADD ./minecraft/ops.txt /usr/local/etc/minecraft/ops.txt
 ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
@@ -60,6 +62,8 @@ ENV LEVEL=world \
   STRUCTURES=true SPAWNPROTECTION=16
 
 #ENV DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
+
+USER minecraft
 
 #set default command
 CMD /spigot_init.sh
