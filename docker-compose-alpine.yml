@@ -4,13 +4,13 @@ spigot:
   - REV=latest
   - POLL=true
   - EULA=TRUE
-  - OPS=AshDev
+  - OPS=AshDevFr
   - PVP=false
   - WORLDBORDER=true
   - DYNMAP=true
-  - ESSENTIALS=false
-  - PERMISSIONSEX=false
-  - CLEARLAG=false
+  - ESSENTIALS=true
+  - PERMISSIONSEX=true
+  - CLEARLAG=true
   volumes:
   - ./data:/minecraft
   ports:

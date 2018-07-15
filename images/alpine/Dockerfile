@@ -63,7 +63,7 @@ ENV LEVEL=world \
   STRUCTURES=true \
   SPAWNPROTECTION=16
 
-#ENV DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
+#ENV DYNMAP=true ESSENTIALS=false ESSENTIALSPROTECT=false PERMISSIONSEX=false CLEARLAG=false
 
 #set default command
 CMD /spigot_init.sh

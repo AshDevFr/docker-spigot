@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-if [ ! -e /$SPIGOT_HOME/eula.txt ]; then
+if [ ! -e $SPIGOT_HOME/eula.txt ]; then
   if [ "$EULA" != "" ]; then
-    echo "# Generated via Docker on $(date)" > /$SPIGOT_HOME/eula.txt
-    echo "eula=$EULA" >> /$SPIGOT_HOME/eula.txt
+    echo "# Generated via Docker on $(date)" > $SPIGOT_HOME/eula.txt
+    echo "eula=$EULA" >> $SPIGOT_HOME/eula.txt
   else
     echo "*****************************************************************"
     echo "*****************************************************************"
@@ -18,86 +18,101 @@ if [ ! -e /$SPIGOT_HOME/eula.txt ]; then
 fi
 
 #only build if jar file does not exist
-if [ ! -f /$SPIGOT_HOME/spigot.jar ]; then
+if [ ! -f $SPIGOT_HOME/spigot.jar ]; then
   echo "Building spigot jar file, be patient"
-  mkdir -p /$SPIGOT_HOME/build
-  cd /$SPIGOT_HOME/build
+  mkdir -p /tmp/buildSpigot
+  cd /tmp/buildSpigot
   wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-  HOME=/$SPIGOT_HOME/build java -jar BuildTools.jar --rev $REV
-  cp /$SPIGOT_HOME/build/Spigot/Spigot-Server/target/spigot-*.jar /$SPIGOT_HOME/spigot.jar
-  mkdir -p /$SPIGOT_HOME/plugins
+  HOME=/tmp/buildSpigot java -jar BuildTools.jar --rev $REV
+  cp /tmp/buildSpigot/Spigot/Spigot-Server/target/spigot-*.jar $SPIGOT_HOME/spigot.jar
+  rm -rf /tmp/buildSpigot
+  mkdir -p $SPIGOT_HOME/plugins
 fi
 
 if [ -n "$WORLDBORDER" ]; then
   if [ "$WORLDBORDER" = "true" ]; then
     echo "Downloading WorldBorder..."
-    wget -O /$SPIGOT_HOME/plugins/WorldBorder.jar https://dev.bukkit.org/projects/worldborder/files/latest
+    wget -O $SPIGOT_HOME/plugins/WorldBorder.jar https://dev.bukkit.org/projects/worldborder/files/latest
   else
     echo "Removing WorldBorder..."
-    rm -f /$SPIGOT_HOME/plugins/WorldBorder.jar
+    rm -f $SPIGOT_HOME/plugins/WorldBorder.jar
   fi
 fi
 
 if [ -n "$DYNMAP" ]; then
   if [ "$DYNMAP" = "true" ]; then
     echo "Downloading Dynmap..."
-    wget -O /$SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
-    wget -O /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
+    wget -O $SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
+    wget -O $SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
     if [ -n "$ESSENTIALS" ]; then
       if [ "$ESSENTIALS" = "true" ]; then
         echo "Downloading Dynmap Essentials..."
-        wget -O /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
+        wget -O $SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar http://mikeprimm.com/dynmap/builds/Dynmap-Essentials/Dynmap-Essentials-HEAD.jar
       else
-    echo "Removing Dynmap Essential..."
-        rm -f /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
+        echo "Removing Dynmap Essential..."
+        rm -f $SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
       fi
     fi
   else
     echo "Removing Dynmap..."
-    rm -f /$SPIGOT_HOME/plugins/dynmap-HEAD.jar
-    rm -f /$SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar
-    rm -f /$SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
+    rm -f $SPIGOT_HOME/plugins/dynmap-HEAD.jar
+    rm -f $SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar
+    rm -f $SPIGOT_HOME/plugins/Dynmap-Essentials-HEAD.jar
   fi
 fi
 
 if [ -n "$ESSENTIALS" ]; then
   if [ "$ESSENTIALS" = "true" ]; then
     echo "Downloading Essentials..."
-    wget -O /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
+    wget -O $SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/Essentials/target/Essentials-2.x-SNAPSHOT.jar
+    if [ -n "$ESSENTIALSPROTECT" ]; then
+      if [ "$ESSENTIALSPROTECT" = "true" ]; then
+        echo "Downloading EssentialsProtect..."
+        wget -O $SPIGOT_HOME/plugins/EssentialsProtect-2.x-SNAPSHOT.jar https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/lastStableBuild/artifact/EssentialsProtect/target/EssentialsProtect-2.x-SNAPSHOT.jar
+      else
+        echo "Removing EssentialsProtect..."
+        rm -f $SPIGOT_HOME/plugins/EssentialsProtect-2.x-SNAPSHOT.jar
+      fi
+      if [ -n "$ESSENTIALS_CREEPERBLOCKDMG" -a -f $SPIGOT_HOME/plugins/Essentials/config.yml ]; then
+        echo "Setting creeper block damage to $ESSENTIALS_CREEPERBLOCKDMG..."
+        sed -i "s/creeper-blockdamage: .*/creeper-blockdamage: $ESSENTIALS_CREEPERBLOCKDMG/" $SPIGOT_HOME/plugins/Essentials/config.yml
+      fi
+    fi
   else
     echo "Removing Essentials..."
-    rm -f /$SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar
+    rm -f $SPIGOT_HOME/plugins/Essentials-2.x-SNAPSHOT.jar
+    rm -f $SPIGOT_HOME/plugins/EssentialsProtect-2.x-SNAPSHOT.jar
   fi
 fi
 
 if [ -n "$CLEARLAG" ]; then
   if [ "$CLEARLAG" = "true" ]; then
     echo "Downloading ClearLag..."
-    wget -O /$SPIGOT_HOME/plugins/Clearlag.jar https://dev.bukkit.org/projects/clearlagg/files/latest
+    wget -O $SPIGOT_HOME/plugins/Clearlag.jar https://dev.bukkit.org/projects/clearlagg/files/latest
   else
     echo "Removing Clearlag..."
-    rm -f /$SPIGOT_HOME/plugins/Clearlag.jar
+    rm -f $SPIGOT_HOME/plugins/Clearlag.jar
   fi
 fi
 
 if [ -n "$PERMISSIONSEX" ]; then
   if [ "$PERMISSIONSEX" = "true" ]; then
     echo "Downloading PermissionsEx..."
-    wget -O /$SPIGOT_HOME/plugins/PermissionsEx-1.23.4.jar https://dev.bukkit.org/projects/permissionsex/files/latest
+    wget -O $SPIGOT_HOME/plugins/PermissionsEx.jar https://dev.bukkit.org/projects/permissionsex/files/latest
   else
     echo "Removing PermissionsEx..."
-    rm -f /$SPIGOT_HOME/plugins/PermissionsEx-*.jar
+    rm -f $SPIGOT_HOME/plugins/PermissionsEx.jar
   fi
 fi
 
-if [ ! -f /$SPIGOT_HOME/ops.txt ]
+if [ ! -f $SPIGOT_HOME/ops.txt ]
 then
-    cp /usr/local/etc/minecraft/ops.txt /$SPIGOT_HOME/
+    cp /usr/local/etc/minecraft/ops.txt $SPIGOT_HOME/
 fi
 
-if [ ! -f /$SPIGOT_HOME/white-list.txt ]
+if [ ! -f $SPIGOT_HOME/white-list.txt ]
 then
-    cp /usr/local/etc/minecraft/white-list.txt /$SPIGOT_HOME/
+    cp /usr/local/etc/minecraft/white-list.txt $SPIGOT_HOME/
 fi
 
 function setServerProp {
@@ -105,13 +120,13 @@ function setServerProp {
   local var=$2
   if [ -n "$var" ]; then
     echo "Setting $prop to $var"
-    sed -i "/$prop\s*=/ c $prop=$var" /$SPIGOT_HOME/server.properties
+    sed -i "/$prop\s*=/ c $prop=$var" $SPIGOT_HOME/server.properties
   fi
 }
 
-if [ ! -f /$SPIGOT_HOME/server.properties ]
+if [ ! -f $SPIGOT_HOME/server.properties ]
 then
-  cp /usr/local/etc/minecraft/server.properties /$SPIGOT_HOME/
+  cp /usr/local/etc/minecraft/server.properties $SPIGOT_HOME/
 
   setServerProp "motd" "$MOTD"
   setServerProp "level-name" "$LEVEL"
@@ -155,28 +170,28 @@ then
         ;;
     esac
 
-    sed -i "/gamemode\s*=/ c gamemode=$MODE" /$SPIGOT_HOME/server.properties
+    sed -i "/gamemode\s*=/ c gamemode=$MODE" $SPIGOT_HOME/server.properties
   fi
 fi
 
-if [ -n "$OPS" -a ! -e /$SPIGOT_HOME/ops.txt.converted ]; then
-  echo $OPS | awk -v RS=, '{print}' >> /$SPIGOT_HOME/ops.txt
+if [ -n "$OPS" -a ! -e $SPIGOT_HOME/ops.txt.converted ]; then
+  echo $OPS | awk -v RS=, '{print}' >> $SPIGOT_HOME/ops.txt
 fi
 
-if [ -n "$ICON" -a ! -e /$SPIGOT_HOME/server-icon.png ]; then
+if [ -n "$ICON" -a ! -e $SPIGOT_HOME/server-icon.png ]; then
   echo "Using server icon from $ICON..."
   # Not sure what it is yet...call it "img"
   wget -q -O /tmp/icon.img $ICON
   specs=$(identify /tmp/icon.img | awk '{print $2,$3}')
   if [ "$specs" = "PNG 64x64" ]; then
-    mv /tmp/icon.img /$SPIGOT_HOME/server-icon.png
+    mv /tmp/icon.img $SPIGOT_HOME/server-icon.png
   else
     echo "Converting image to 64x64 PNG..."
-    convert /tmp/icon.img -resize 64x64! /$SPIGOT_HOME/server-icon.png
+    convert /tmp/icon.img -resize 64x64! $SPIGOT_HOME/server-icon.png
   fi
 fi
 
-cd /$SPIGOT_HOME/
+cd $SPIGOT_HOME/
 
 su -c "/spigot_run.sh server java $JVM_OPTS -jar spigot.jar"
 

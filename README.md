@@ -5,27 +5,25 @@
 [![Docker Build Status](https://img.shields.io/docker/build/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot/builds)
 [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/ashdev/minecraft-spigot/latest.svg)]()
 [![ImageLayers Layers](https://img.shields.io/imagelayers/layers/ashdev/minecraft-spigot/latest.svg)]()
-[![Travis](https://img.shields.io/travis/AshDevFr/docker-spigot.svg)]()
 
-**This is the new repository for [ashdev/docker-spigot](https://hub.docker.com/r/ashdev/docker-spigot)**
+**This image replace the old image: [ashdev/docker-spigot](https://hub.docker.com/r/ashdev/docker-spigot)**
 
-## Minecraft 1.12 World of Color Update
+## Minecraft 1.13 Update Aquatic
 
-This docker image is ready to use the latest version of Minecraft (1.12 World of Color Update)
+This docker image is ready to use the latest version of Minecraft (1.13 Update Aquatic)
 
 ### Available tags
 
 All available tags are always listed [in Docker Hub](https://hub.docker.com/r/ashdev/minecraft-spigot/tags):
 
-- `1.12.2`, `1.12`, `latest`: Latest server for Minecraft 1.12.2.
-- `1.12.2-alpine`, `1.12-alpine`, `alpine`: Latest server using Alpine for Minecraft 1.12.2.
+- `1.13`, `latest`: Latest server for Minecraft 1.13.
+- `1.13-alpine`, `alpine`: Latest server using Alpine for Minecraft 1.13.
 
+The plugins are using the latest version. In case of issue, disable them.
 
-Most of the plugins are not already released for the latest version. In case of issue, disable them.
+To use the version 1.13 of docker run
 
-To use the version 1.12 of docker run
-
-    docker run -d -it -e REV=1.12 -p 25565:25565 ashdev/minecraft-spigot:latest
+    docker run -d -it -e REV=1.13 -p 25565:25565 ashdev/minecraft-spigot:latest
 
 ## Description
 
@@ -298,7 +296,7 @@ the setting shown in the example (max and min at 1024 MB):
 
 ## Plugins  
 
-DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
+DYNMAP=true ESSENTIALS=false ESSENTIALSPROTECT=false PERMISSIONSEX=false CLEARLAG=false
 
 ### WorldBorder
 
@@ -312,6 +310,14 @@ DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
 
     docker run -d -e ESSENTIALS=true ...
 
+### EssentialsProctect
+
+    docker run -d -e ESSENTIALS=true ESSENTIALSPROTECT=true ...
+
+#### Creeper blockdamage options
+
+    docker run -d -e ESSENTIALS=true ESSENTIALSPROTECT=true ESSENTIALS_CREEPERBLOCKDMG=true ...
+
 ### PermissionsEx
 
     docker run -d -e PERMISSIONSEX=true ...
@@ -319,5 +325,11 @@ DYNMAP=true ESSENTIALS=false PERMISSIONSEX=false CLEARLAG=false
 ### Clearlag
 
     docker run -d -e CLEARLAG=true ...
+
+## Issues
+
+If you have any problems with or questions about this image, please contact me by submitting a ticket through a [GitHub issue](https://github.com/AshDevFr/docker-spigot/issues)
+
+
 
 Thanks to [nimmis](https://github.com/nimmis/docker-spigot) & [itzg](https://github.com/itzg/dockerfiles/tree/master/minecraft-server)
