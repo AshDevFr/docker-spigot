@@ -12,7 +12,7 @@ ENV JAVA_VERSION_MAJOR=8 \
 
 # Install dependencies
 RUN apk upgrade --update && \
-    apk add --update wget curl ca-certificates openssl bash git screen util-linux && \
+    apk add --update wget curl ca-certificates openssl bash git screen util-linux sudo shadow && \
     update-ca-certificates
 
 # Install Java8
@@ -21,7 +21,10 @@ RUN apk add openjdk8-jre
 #default directory for SPIGOT-server
 ENV SPIGOT_HOME /minecraft
 
-RUN mkdir ${SPIGOT_HOME}
+RUN addgroup -g 1000 -S minecraft && \
+  adduser -u 1000 -S minecraft -G minecraft -h /minecraft
+
+RUN echo "minecraft ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/minecraft
 
 ADD ./minecraft/ops.txt /usr/local/etc/minecraft/ops.txt
 ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
@@ -39,6 +42,7 @@ EXPOSE 8123
 VOLUME ["/minecraft"]
 
 ENV UID=1000
+ENV GUID=1000
 
 ENV MOTD A Minecraft Server Powered by Spigot & Docker
 ENV REV latest
