@@ -71,7 +71,7 @@ fi
 if [ -n "$DYNMAP" ]; then
   if [ "$DYNMAP" = "true" ]; then
     echo "Downloading Dynmap..."
-    wget -O $SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/dynmap-HEAD.jar
+    wget -O $SPIGOT_HOME/plugins/dynmap-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap/Dynmap-HEAD-spigot.jar
     wget -O $SPIGOT_HOME/plugins/dynmap-mobs-HEAD.jar http://mikeprimm.com/dynmap/builds/dynmap-mobs/dynmap-mobs-HEAD.jar
     if [ -n "$ESSENTIALS" ]; then
       if [ "$ESSENTIALS" = "true" ]; then
