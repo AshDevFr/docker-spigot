@@ -1,10 +1,9 @@
 # Minecraft server SPIGOT
 
+[![Docker Automated build](https://img.shields.io/docker/automated/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot)
 [![Docker Stars](https://img.shields.io/docker/stars/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot)
 [![Docker Pulls](https://img.shields.io/docker/pulls/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot)
 [![Docker Build Status](https://img.shields.io/docker/build/ashdev/minecraft-spigot.svg)](https://hub.docker.com/r/ashdev/minecraft-spigot/builds)
-[![ImageLayers Size](https://img.shields.io/imagelayers/image-size/ashdev/minecraft-spigot/latest.svg)]()
-[![ImageLayers Layers](https://img.shields.io/imagelayers/layers/ashdev/minecraft-spigot/latest.svg)]()
 
 **This image replace the old image: [ashdev/docker-spigot](https://hub.docker.com/r/ashdev/docker-spigot)**
 
