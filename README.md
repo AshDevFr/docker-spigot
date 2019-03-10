@@ -23,7 +23,7 @@ The plugins are using the latest version. In case of issue, disable them.
 
 To use the version 1.13 of docker run
 
-    docker run -d -it -e REV=1.13 -p 25565:25565 ashdev/minecraft-spigot:latest
+    docker run -d -e REV=1.13 -p 25565:25565 ashdev/minecraft-spigot:latest
 
 ## Description
 
