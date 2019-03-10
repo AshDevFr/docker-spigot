@@ -1,11 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-name=$1
-shift
 cmd="$@"
 
-mkdir -p /minecraft/run
-echo $$ > /minecraft/run/$name.pid
+echo $$ > $RUN_DIR/$APP_NAME.pid
+rm -f $RUN_DIR/$$.input
+mkfifo $RUN_DIR/$$.input
 
 echo "Starting $cmd with pid $$"
-exec $cmd
+exec $cmd < <(tail -f $RUN_DIR/$$.input)

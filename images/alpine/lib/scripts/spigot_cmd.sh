@@ -2,6 +2,6 @@
 
 cmd=$@
 
-PID=`cat /var/run/server.pid`
+PID=`cat $RUN_DIR/$APP_NAME.pid`
 
-echo "$cmd" > /proc/$PID/fd/0
+echo "$cmd" > $RUN_DIR/$PID.input

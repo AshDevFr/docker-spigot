@@ -12,14 +12,19 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 RUN apt-get install -y curl oracle-java8-installer oracle-java8-set-default supervisor pwgen
 RUN apt-get update && apt-get install -y wget git && apt-get clean all
 
+ENV APP_NAME=server
 #default directory for SPIGOT-server
 ENV SPIGOT_HOME /minecraft
+ENV RUN_DIR /minecraft_run
 
 RUN groupadd -g 1000 minecraft && \
   useradd -s /bin/bash -d /minecraft -m minecraft -g minecraft && \
   usermod -aG sudo minecraft
 
 RUN echo "minecraft ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/minecraft
+
+RUN mkdir $RUN_DIR
+RUN chown minecraft:minecraft $RUN_DIR
 
 ADD ./minecraft/ops.txt /usr/local/etc/minecraft/ops.txt
 ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
@@ -66,4 +71,4 @@ ENV LEVEL=world \
 USER minecraft
 
 #set default command
-CMD /spigot_init.sh
+CMD trap 'exit' INT; /spigot_init.sh

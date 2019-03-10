@@ -18,13 +18,18 @@ RUN apk upgrade --update && \
 # Install Java8
 RUN apk add openjdk8-jre
 
+ENV APP_NAME=server
 #default directory for SPIGOT-server
 ENV SPIGOT_HOME /minecraft
+ENV RUN_DIR /minecraft_run
 
 RUN addgroup -g 1000 -S minecraft && \
   adduser -u 1000 -S minecraft -G minecraft -h /minecraft
 
 RUN echo "minecraft ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/minecraft
+
+RUN mkdir $RUN_DIR
+RUN chown minecraft:minecraft $RUN_DIR
 
 ADD ./minecraft/ops.txt /usr/local/etc/minecraft/ops.txt
 ADD ./minecraft/white-list.txt /usr/local/etc/minecraft/white-list.txt
@@ -70,4 +75,4 @@ ENV LEVEL=world \
 #ENV DYNMAP=true ESSENTIALS=false ESSENTIALSPROTECT=false PERMISSIONSEX=false CLEARLAG=false
 
 #set default command
-CMD /spigot_init.sh
+CMD trap 'exit' INT; /spigot_init.sh

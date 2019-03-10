@@ -1,18 +1,20 @@
-spigot:
-  build: images/alpine
-  environment:
-  - REV=latest
-  - POLL=true
-  - EULA=TRUE
-  - OPS=AshDevFr
-  - PVP=false
-  - WORLDBORDER=true
-  - DYNMAP=true
-  - ESSENTIALS=true
-  - PERMISSIONSEX=true
-  - CLEARLAG=true
-  volumes:
-  - ./data:/minecraft
-  ports:
-  - "25565:25565"
-  - "8123:8123"
+version: '3'
+services:
+  spigot:
+    build: images/alpine
+    environment:
+    - REV=latest
+    - POLL=true
+    - EULA=TRUE
+    - OPS=AshDevFr
+    - PVP=false
+    - WORLDBORDER=true
+    - DYNMAP=true
+    - ESSENTIALS=true
+    - PERMISSIONSEX=true
+    - CLEARLAG=true
+    volumes:
+    - ./data:/minecraft
+    ports:
+    - "25565:25565"
+    - "8123:8123"
