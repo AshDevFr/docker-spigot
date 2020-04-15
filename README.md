@@ -84,6 +84,12 @@ example:
 
     docker exec mc /spigot_cmd.sh op AshDevFr
 
+## High CPU on spigot server
+
+You can disable the console to reduce the CPU usage but you will loose the ability to send commands to the server
+
+    docker run -d -e NOCONSOLE=true ...
+
 ## EULA Support
 
 Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula). To accept add
@@ -103,18 +109,6 @@ to map a directory on your host machine to the container's `/minecraft` director
 
 When attached in this way you can stop the server, edit the configuration under your attached `/path/on/host`
 and start the server again with `docker start CONTAINERID` to pick up the new configuration.
-
-### In ubuntu you can specify the UID of the user
-
-**NOTE**: By default, the files in the attached directory will be owned by the host user with UID of 1000.
-You can use an different UID by passing the option:
-
-    -e UID=1000
-
-replacing 1000 with a UID that is present on the host.
-Here is one way to find the UID given a username:
-
-    grep some_host_user /etc/passwd|cut -d: -f3
 
 ## Running with Plugins
 

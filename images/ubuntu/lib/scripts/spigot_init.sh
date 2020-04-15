@@ -226,7 +226,14 @@ fi
 
 cd $SPIGOT_HOME/
 
-/spigot_run.sh java $JVM_OPTS -jar spigot.jar nogui
+SPIGOT_OPTS=""
+if [ -n "$NOCONSOLE" ]; then
+  if [ "$NOCONSOLE" = "true" ]; then
+    SPIGOT_OPTS="${SPIGOT_OPTS} --noconsole"
+  fi
+fi
+
+/spigot_run.sh java $JVM_OPTS -jar spigot.jar nogui $SPIGOT_OPTS
 
 # fallback to root and run shell if spigot don't start/forced exit
 bash
