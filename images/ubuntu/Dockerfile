@@ -1,15 +1,12 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 MAINTAINER AshDev <ashdevfr@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD ./lib/apt/sources.list /etc/apt/sources.list
 RUN apt-get update -y; apt-get upgrade -y
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:webupd8team/java -y
-RUN apt-get update -y; apt-get upgrade -y
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-RUN apt-get install -y curl oracle-java8-installer oracle-java8-set-default supervisor pwgen
+RUN apt-get install -y curl openjdk-8-jdk supervisor pwgen
 RUN apt-get update && apt-get install -y wget git && apt-get clean all
 
 ENV APP_NAME=server
@@ -21,7 +18,7 @@ RUN groupadd -g 1000 minecraft && \
   useradd -s /bin/bash -d /minecraft -m minecraft -g minecraft && \
   usermod -aG sudo minecraft
 
-RUN echo "minecraft ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/minecraft
+RUN echo "minecraft ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
 
 RUN mkdir $RUN_DIR
 RUN chown minecraft:minecraft $RUN_DIR

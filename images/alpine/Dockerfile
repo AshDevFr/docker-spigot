@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.11
 MAINTAINER AshDev <ashdevfr@gmail.com>
 
 # Java Version and other ENV
