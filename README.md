@@ -7,22 +7,22 @@
 
 **This image replace the old image: [ashdev/docker-spigot](https://hub.docker.com/r/ashdev/docker-spigot)**
 
-## Minecraft 1.13 Update Aquatic
+## Minecraft 1.15 Nether Update
 
-This docker image is ready to use the latest version of Minecraft (1.13 Update Aquatic)
+This docker image is ready to use the latest version of Minecraft (1.15 Nether Update)
 
 ### Available tags
 
 All available tags are always listed [in Docker Hub](https://hub.docker.com/r/ashdev/minecraft-spigot/tags):
 
-- `1.13`, `latest`: Latest server for Minecraft 1.13.
-- `1.13-alpine`, `alpine`: Latest server using Alpine for Minecraft 1.13.
+- `1.15`, `latest`: Latest server for Minecraft 1.15.
+- `1.15-alpine`, `alpine`: Latest server using Alpine for Minecraft 1.15.
 
 The plugins are using the latest version. In case of issue, disable them.
 
-To use the version 1.13 of docker run
+To use the version 1.15 of docker run
 
-    docker run -d -e REV=1.13 -p 25565:25565 ashdev/minecraft-spigot:latest
+    docker run -d -e REV=1.15 -p 25565:25565 ashdev/minecraft-spigot:latest
 
 ## Description
 
